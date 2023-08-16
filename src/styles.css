@@ -17,7 +17,7 @@
   max-width: 400px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(200, 200, 200, 0.18);
 }
 
 .priority-buttons, .TodoList {
