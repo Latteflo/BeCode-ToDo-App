@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { FaEdit, FaTrashAlt, FaCheck } from "react-icons/fa"
 
 const TodoItem = ({ task, onDelete, onToggle, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -22,14 +23,23 @@ const TodoItem = ({ task, onDelete, onToggle, onUpdate }) => {
       </li>
     )
   }
-
   return (
-    <li style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-      {task.text} - <strong>{task.priority}</strong>
+    <li
+      data-priority={task.priority}
+      data-completed={task.completed ? "true" : "false"}
+      style={{ textDecoration: task.completed ? "line-through" : "none" }}
+    >
+      <strong>{task.text}</strong>
       <div>
-        <button onClick={() => setIsEditing(true)}>Edit</button>
-        <button onClick={() => onToggle(task.id)}>Toggle</button>
-        <button onClick={() => onDelete(task.id)}>Delete</button>
+        <button className="edit" onClick={() => setIsEditing(true)}>
+          <FaEdit />{" "}
+        </button>
+        <button className="toggle" onClick={() => onToggle(task.id)}>
+          <FaCheck />{" "}
+        </button>
+        <button className="delete" onClick={() => onDelete(task.id)}>
+          <FaTrashAlt />
+        </button>
       </div>
     </li>
   )

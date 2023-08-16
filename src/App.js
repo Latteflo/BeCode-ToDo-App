@@ -1,9 +1,41 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import TodoList from "./TodoList"
 import "./styles.css"
 
 const App = () => {
-  const [tasks, setTasks] = useState([])
+  const savedTasks = localStorage.getItem('tasks');
+  const initialTasks = savedTasks ? JSON.parse(savedTasks) : [];
+
+  const [tasks, setTasks] = useState(initialTasks);
+  const [inputValue, setInputValue] = useState(""); 
+  const [selectedPriority, setSelectedPriority] = useState("Medium"); 
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}, [tasks]);
+
+
+  const addTask = (task) => {
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        text: task,
+        completed: false,
+        priority: selectedPriority,
+      },
+    ])
+  }
+
+  const updateTask = (id, newText) => {
+    setTasks(
+      tasks.map((task) => (task.id === id ? { ...task, text: newText } : task))
+    )
+  }
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id))
@@ -17,39 +49,56 @@ const App = () => {
     )
   }
 
-  const addTask = (task, priority) => {
-    setTasks([
-      ...tasks,
-      { id: Date.now(), text: task, completed: false, priority },
-    ])
-  }
 
-  const updateTask = (id, newText) => {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, text: newText } : task))
-    )
-  }
 
   return (
     <div className="App">
-      <h1>Todo App</h1>
-      <div>
+      <h1>My Todo App</h1>
+      <div className="glass">
+        <div>
         <input
           type="text"
           placeholder="New task..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => {
-            const priority = document.getElementById("priority").value
-            if (e.key === "Enter" && e.target.value) {
-              addTask(e.target.value, priority)
-              e.target.value = ""
+            if (e.key === "Enter" && inputValue) {
+              addTask(inputValue)
+              setInputValue("")
             }
           }}
         />
-        <select id="priority">
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
+
+        <div className="priority-buttons">
+          <span>Priority level</span>
+          <button
+            data-priority="High"
+            className={selectedPriority === "High" ? "active" : ""}
+            onClick={(e) =>
+              setSelectedPriority(e.target.getAttribute("data-priority"))
+            }
+          >
+            High
+          </button>
+          <button
+            data-priority="Medium"
+            className={selectedPriority === "Medium" ? "active" : ""}
+            onClick={(e) =>
+              setSelectedPriority(e.target.getAttribute("data-priority"))
+            }
+          >
+            Medium
+          </button>
+          <button
+            data-priority="Low"
+            className={selectedPriority === "Low" ? "active" : ""}
+            onClick={(e) =>
+              setSelectedPriority(e.target.getAttribute("data-priority"))
+            }
+          >
+            Low
+          </button>
+        </div>
       </div>
       <TodoList
         tasks={tasks}
@@ -57,6 +106,7 @@ const App = () => {
         onToggle={toggleCompletion}
         onUpdate={updateTask}
       />
+      </div>
     </div>
   )
 }

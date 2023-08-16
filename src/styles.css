@@ -1,17 +1,36 @@
 .App {
-  font-family: "Arial", sans-serif;
-  max-width: 600px;
-  margin: 50px auto;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(45deg, #f3e7e9, #e3eeff, #e3f8ff);
+  height: 100vh;
+  overflow: auto;
+  padding: 50px 0;
+}
+
+.glass {
+  background: rgba(250, 193, 193, 0.1);
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.priority-buttons, .TodoList {
+  margin-top: 20px;
 }
 
 h1 {
   text-align: center;
+  text-shadow: #abafac 1px 1px 1px;
 }
 
 input[type="text"] {
-  width: 100%;
+  width: 96%;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 4px;
@@ -31,6 +50,29 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: capitalize;
+}
+
+/* Task Colors based on Importance Levels */
+li[data-priority="High"] {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid red;
+}
+
+li[data-priority="Medium"] {
+  background-color: rgba(255, 165, 0, 0.2);
+  border: 1px solid orange;
+}
+
+li[data-priority="Low"] {
+  background-color: rgba(255, 255, 0, 0.2);
+  border: 1px solid yellow;
+}
+
+/* Completed Task Color */
+li[data-completed="true"] {
+  background-color: rgba(0, 128, 0, 0.2);
+  border: 1px solid green;
 }
 
 button {
@@ -43,4 +85,82 @@ button {
 
 button:hover {
   background-color: #ddd;
+}
+
+.priority-buttons {
+  margin-bottom: 15px;
+}
+
+.priority-buttons span {
+  margin-right: 10px;
+  color: #777;
+}
+
+.priority-buttons button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: 2px solid transparent;
+}
+
+.priority-buttons button[data-priority="High"] {
+  background-color: #fd6e67;
+}
+
+.priority-buttons button[data-priority="Medium"] {
+  background-color: #ffa600f8;
+}
+
+.priority-buttons button[data-priority="Low"] {
+  background-color: #ffff00;
+}
+
+.priority-buttons button.active {
+  border: 2px solid black;
+}
+
+/* Edit Button */
+button.edit {
+  background-color: #82bfff;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+button.edit:hover {
+  background-color: #0056b3;
+}
+
+/* Toggle Button */
+button.toggle {
+  background-color: #d7d7d7;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+button.toggle:hover {
+  background-color: #b0b0b0;
+}
+
+/* Delete Button */
+button.delete {
+  background-color: #fd6e67;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.delete:hover {
+  background-color: #e70f00;
 }
