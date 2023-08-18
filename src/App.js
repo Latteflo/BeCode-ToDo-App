@@ -1,23 +1,23 @@
-import React, { useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import TodoList from "./TodoList"
 import "./styles.css"
 
 const App = () => {
-  const savedTasks = localStorage.getItem('tasks');
-  const initialTasks = savedTasks ? JSON.parse(savedTasks) : [];
-
-  const [tasks, setTasks] = useState(initialTasks);
-  const [inputValue, setInputValue] = useState(""); 
-  const [selectedPriority, setSelectedPriority] = useState("Medium"); 
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const savedTasks = localStorage.getItem("tasks")
+      return savedTasks ? JSON.parse(savedTasks) : []
+    } catch (error) {
+      console.error("Error parsing tasks from localStorage:", error)
+      return []
+    }
+  })
+  const [inputValue, setInputValue] = useState("")
+  const [selectedPriority, setSelectedPriority] = useState("Medium")
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}, [tasks]);
-
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }, [tasks])
 
   const addTask = (task) => {
     setTasks([
@@ -49,64 +49,66 @@ const App = () => {
     )
   }
 
-
+  const remainingTasks = tasks.filter((task) => !task.completed).length
 
   return (
     <div className="App">
       <h1>My Todo App</h1>
       <div className="glass">
-        <div>
-        <input
-          type="text"
-          placeholder="New task..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && inputValue) {
-              addTask(inputValue)
-              setInputValue("")
-            }
-          }}
-        />
-
-        <div className="priority-buttons">
-          <span>Priority level</span>
-          <button
-            data-priority="High"
-            className={selectedPriority === "High" ? "active" : ""}
-            onClick={(e) =>
-              setSelectedPriority(e.target.getAttribute("data-priority"))
-            }
-          >
-            High
-          </button>
-          <button
-            data-priority="Medium"
-            className={selectedPriority === "Medium" ? "active" : ""}
-            onClick={(e) =>
-              setSelectedPriority(e.target.getAttribute("data-priority"))
-            }
-          >
-            Medium
-          </button>
-          <button
-            data-priority="Low"
-            className={selectedPriority === "Low" ? "active" : ""}
-            onClick={(e) =>
-              setSelectedPriority(e.target.getAttribute("data-priority"))
-            }
-          >
-            Low
-          </button>
+        <div className="content">
+          <span>Choose priority level</span>
+          <div className="priority-buttons">
+            <br />
+            <button
+              data-priority="High"
+              className={selectedPriority === "High" ? "active" : ""}
+              onClick={(e) =>
+                setSelectedPriority(e.target.getAttribute("data-priority"))
+              }
+            >
+              High
+            </button>
+            <button
+              data-priority="Medium"
+              className={selectedPriority === "Medium" ? "active" : ""}
+              onClick={(e) =>
+                setSelectedPriority(e.target.getAttribute("data-priority"))
+              }
+            >
+              Medium
+            </button>
+            <button
+              data-priority="Low"
+              className={selectedPriority === "Low" ? "active" : ""}
+              onClick={(e) =>
+                setSelectedPriority(e.target.getAttribute("data-priority"))
+              }
+            >
+              Low
+            </button>
+          </div>{" "}
+          <input
+            type="text"
+            placeholder="New task..."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && inputValue) {
+                addTask(inputValue)
+                setInputValue("")
+              }
+            }}
+          />
         </div>
+        <TodoList
+          tasks={tasks}
+          onDelete={deleteTask}
+          onToggle={toggleCompletion}
+          onUpdate={updateTask}
+          setTasks={setTasks}
+        />
       </div>
-      <TodoList
-        tasks={tasks}
-        onDelete={deleteTask}
-        onToggle={toggleCompletion}
-        onUpdate={updateTask}
-      />
-      </div>
+      <span>{remainingTasks} tasks remaining</span>
     </div>
   )
 }

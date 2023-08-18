@@ -1,18 +1,22 @@
-# Todo App with Glassmorphism Design
+# Glassmorphism Todo App
 
-A modern and intuitive Todo App built with React, featuring the trending glassmorphism design.
+Elevate your task management experience with this sleek Todo App. Crafted with React and adorned with the contemporary Glassmorphism design, it offers a modern and intuitive user interface.
 
-![2023-08-16 14 38 00](https://github.com/Latteflo/BeCode-ToDo-App/assets/92720989/0cbcb225-b294-47c6-bf91-e4041704144e)
+## 🌟 Features
 
-## Features
+ - Glassmorphism Aesthetics: Dive into the trending UI design that brings a frosted glass-like translucency to your application.
 
--Glassmorphism Design: Trendy UI design with a "glassy" look.
+ - Prioritize Like a Pro: Organize your tasks with three distinct priority levels: High, Medium, and Low.
 
--Task Prioritization: Classify tasks based on their priority levels: High, Medium, or Low.
+ - Persistent Memory: Integrated with local storage, ensuring your tasks remain intact even after you've closed the browser.
 
--Local Storage Integration: Tasks are saved in the browser's local storage, so you won't lose them even if you close the tabs
+ - Interactive UX: Interactive icons for editing, deleting, and toggling tasks ensure a streamlined experience.
 
--Interactive Icons: Uses icons for editing, deleting, and toggling tasks for a more user-friendly interface.
+ - Fully Responsive: The design is fluid and adaptive, making it responsive across various devices.
 
-#Live Demo: 
-[Check out the live demo on Netlify!](https://flo-s-todo.netlify.app/)
+### 🚀 Live Demo: [Check out the live demo on Netlify!](https://flo-s-todo.netlify.app/)
+
+
+### 🖼️ Preview
+![ToDoApp](<src/media/2023-08-18 12 58 09.png>)
+

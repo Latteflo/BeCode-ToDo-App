@@ -3,10 +3,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(45deg, #f3e7e9, #e3eeff, #e3f8ff);
   height: 100vh;
   overflow: auto;
   padding: 50px 0;
+  background-image: url("./media/annie-spratt-0ZPSX_mQ3xI-unsplash.jpg") ;
+  background-size: cover;
 }
 
 .glass {
@@ -15,9 +16,15 @@
   padding: 20px;
   width: 80%;
   max-width: 400px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13px);
+  box-shadow: 0 4px 6px rgba(51, 51, 51, 0.273);
   border: 1px solid rgba(200, 200, 200, 0.18);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .priority-buttons, .TodoList {
@@ -50,7 +57,13 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-transform: capitalize;
+}
+
+li strong {
+  margin-right: 10px;
+    text-transform: capitalize;
+    flex: content 1;
+
 }
 
 /* Task Colors based on Importance Levels */
@@ -80,7 +93,7 @@ button {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
+  margin: 5px;
 }
 
 button:hover {
@@ -89,10 +102,14 @@ button:hover {
 
 .priority-buttons {
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.priority-buttons span {
-  margin-right: 10px;
+
+ span {
+  margin: 10px;
   color: #777;
 }
 
@@ -118,49 +135,43 @@ button:hover {
   border: 2px solid black;
 }
 
-/* Edit Button */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button.edit {
   background-color: #82bfff;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 5px;
-  transition: background-color 0.3s;
 }
 
 button.edit:hover {
   background-color: #0056b3;
 }
 
-/* Toggle Button */
 button.toggle {
   background-color: #d7d7d7;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 5px;
-  transition: background-color 0.3s;
 }
 
 button.toggle:hover {
   background-color: #b0b0b0;
 }
 
-/* Delete Button */
 button.delete {
   background-color: #fd6e67;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button.delete:hover {
   background-color: #e70f00;
+}
+
+@media screen and (max-width: 400px)
+ {
+  .buttons-container {
+    flex-direction: column;
+  }
+  botton {
+    margin: 3px;
+    padding: 3px;
+  }
 }
