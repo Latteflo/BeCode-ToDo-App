@@ -1,18 +1,17 @@
-import React from "react";
-import { Droppable, DragDropContext } from "react-beautiful-dnd";
-import TodoItem from "./TodoItem";
+import React from "react"
+import { Droppable, DragDropContext } from "react-beautiful-dnd"
+import TodoItem from "./TodoItem"
 
 const TodoList = ({ tasks, onDelete, onToggle, onUpdate, setTasks }) => {
-  
   const onDragEnd = (result) => {
-    if (!result.destination) return;
+    if (!result.destination) return
 
-    const reorderedTasks = Array.from(tasks);
-    const [removed] = reorderedTasks.splice(result.source.index, 1);
-    reorderedTasks.splice(result.destination.index, 0, removed);
+    const reorderedTasks = Array.from(tasks)
+    const [removed] = reorderedTasks.splice(result.source.index, 1)
+    reorderedTasks.splice(result.destination.index, 0, removed)
 
-    setTasks(reorderedTasks);
-  };
+    setTasks(reorderedTasks)
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -34,7 +33,7 @@ const TodoList = ({ tasks, onDelete, onToggle, onUpdate, setTasks }) => {
         )}
       </Droppable>
     </DragDropContext>
-  );
-};
+  )
+}
 
-export default TodoList;
+export default TodoList
